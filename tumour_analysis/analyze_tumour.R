@@ -40,7 +40,11 @@ if("SITE_ICD10_O2" %in% names(df)) {
   # Extract first 3 chars for main category
   df$SITE_MAIN <- substr(df$SITE_ICD10_O2, 1, 3)
   
-  site_counts <- sort(table(df$SITE_MAIN), decreasing = TRUE)
+  # EXCLUDE Non-Melanoma Skin Cancer (C44)
+  # Standard practice in cancer epidemiology as it skews rankings due to high incidence but low mortality.
+  df_filtered <- df[df$SITE_MAIN != "C44", ]
+  
+  site_counts <- sort(table(df_filtered$SITE_MAIN), decreasing = TRUE)
   top_10_sites <- head(site_counts, 10)
   
   # Create labels with descriptions
@@ -55,7 +59,7 @@ if("SITE_ICD10_O2" %in% names(df)) {
   png(paste0(results_path, "top_10_cancer_sites.png"), width=900, height=600)
   par(mar=c(5, 12, 4, 2) + 0.1) # Increase left margin for long labels
   barplot(counts_scaled, 
-          main = "Top 10 Cancer Sites (ICD-10)",
+          main = "Top 10 Cancer Sites (Excl. C44 NMSC)",
           xlab = "Count (x 10^5)",
           names.arg = labels,
           col = "steelblue",
