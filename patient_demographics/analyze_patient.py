@@ -39,6 +39,7 @@ if "GENDER" in df.columns:
     colors = ['lightblue' if x == 'Male' else 'pink' if x == 'Female' else 'gray' for x in gender_counts_scaled.index]
     
     # FIX: Plot the SCALED values
+    # FIX: Plot the SCALED values
     ax = sns.barplot(x=gender_counts_scaled.index, y=gender_counts_scaled.values, palette=colors)
     
     plt.title("Patient Gender Distribution", fontsize=14)
