@@ -24,6 +24,7 @@ icd10_map <- c(
   "C64" = "Kidney",
   "C90" = "Mult. Myeloma",
   "C92" = "Myeloid Leukemia",
+  "C54" = "Uterus",
   "D05" = "Carcinoma in situ (Breast)"
 )
 

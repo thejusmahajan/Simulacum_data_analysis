@@ -36,7 +36,8 @@ icd10_map = {
     "C50": "Breast", "C61": "Prostate", "C34": "Lung",
     "C18": "Colon", "C19": "Rectosigmoid", "C20": "Rectum",
     "C43": "Melanoma", "C67": "Bladder", "C25": "Pancreas",
-    "C64": "Kidney", "C90": "Mult. Myeloma", "C92": "Myeloid Leukemia"
+    "C64": "Kidney", "C90": "Mult. Myeloma", "C92": "Myeloid Leukemia",
+    "C54": "Uterus"
 }
 labels = [f"{code} ({icd10_map.get(code, code)})" for code in site_counts.index]
 
