@@ -28,7 +28,7 @@ if "GENDER" in df.columns:
     # Count
     gender_counts = df['GENDER_LABEL'].value_counts()
     
-    # Remove zero counts
+    # Remove zero counts (Strictly)
     gender_counts = gender_counts[gender_counts > 0]
     
     # Scale to Thousands
@@ -36,9 +36,10 @@ if "GENDER" in df.columns:
     
     plt.figure(figsize=(8, 6))
     # Use simple colors
-    colors = ['lightblue' if x == 'Male' else 'pink' if x == 'Female' else 'gray' for x in gender_counts.index]
+    colors = ['lightblue' if x == 'Male' else 'pink' if x == 'Female' else 'gray' for x in gender_counts_scaled.index]
     
-    ax = sns.barplot(x=gender_counts.index, y=gender_counts.values, palette=colors)
+    # FIX: Plot the SCALED values
+    ax = sns.barplot(x=gender_counts_scaled.index, y=gender_counts_scaled.values, palette=colors)
     
     plt.title("Patient Gender Distribution", fontsize=14)
     plt.xlabel("Gender", fontsize=12)
@@ -72,9 +73,10 @@ if "VITALSTATUS" in df.columns:
     vital_counts_scaled = vital_counts / 1000
     
     plt.figure(figsize=(8, 6))
-    colors = ['lightgreen' if x == 'Alive' else 'salmon' for x in vital_counts.index]
+    colors = ['lightgreen' if x == 'Alive' else 'salmon' for x in vital_counts_scaled.index]
     
-    sns.barplot(x=vital_counts.index, y=vital_counts.values, palette=colors)
+    # FIX: Plot the SCALED values
+    sns.barplot(x=vital_counts_scaled.index, y=vital_counts_scaled.values, palette=colors)
     
     plt.title("Patient Vital Status", fontsize=14)
     plt.xlabel("Status", fontsize=12)
