@@ -37,35 +37,6 @@ get_cancer_label <- function(code) {
 
 # 1. Top 10 Cancer Sites
 if("SITE_ICD10_O2" %in% names(df)) {
-  # Extract first 3 chars for main category
-  df$SITE_MAIN <- substr(df$SITE_ICD10_O2, 1, 3)
-  
-  # EXCLUDE Non-Melanoma Skin Cancer (C44)
-  # Standard practice in cancer epidemiology as it skews rankings due to high incidence but low mortality.
-  df_filtered <- df[df$SITE_MAIN != "C44", ]
-  
-  site_counts <- sort(table(df_filtered$SITE_MAIN), decreasing = TRUE)
-  top_10_sites <- head(site_counts, 10)
-  
-  # Create labels with descriptions
-  labels <- sapply(names(top_10_sites), get_cancer_label)
-  
-  # Scale counts to 10^5
-  counts_scaled <- top_10_sites / 100000
-  
-  print("Top 10 Cancer Sites:")
-  print(top_10_sites)
-  
-  png(paste0(results_path, "top_10_cancer_sites.png"), width=900, height=600)
-  par(mar=c(5, 12, 4, 2) + 0.1) # Increase left margin for long labels
-  barplot(counts_scaled, 
-          main = "Top 10 Cancer Sites (Excl. C44 NMSC)",
-          xlab = "Count (x 10^5)",
-          names.arg = labels,
-          col = "steelblue",
-          horiz = TRUE, # Horizontal bars for better readability of labels
-          las = 1) # Horizontal axis labels
-  dev.off()
   print("Top 10 sites plot saved.")
 } else {
   print("SITE_ICD10_O2 column not found.")
